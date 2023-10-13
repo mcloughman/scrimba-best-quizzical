@@ -110,8 +110,8 @@ export default function App() {
   return (
     <div className="container">
       <div className="images-div">
-        <img src="src/assets/blob-baby.png" className="img baby" />
-        <img src="src/assets/blob-lemony.png" className="img lemony" />
+        <img src="src/assets/blob-baby.png" alt="" className="img baby" />
+        <img src="src/assets/blob-lemony.png" alt="" className="img lemony" />
       </div>
       {error && <h3>Something went wrong! :( {error}</h3>}
       {!quizInProgress && !error && (
