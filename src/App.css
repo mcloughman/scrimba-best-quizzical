@@ -1,0 +1,153 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  text-align: center;
+  font-family: "Karla", sans-serif;
+  background: #f5f7fb;
+  color: #293264;
+}
+.container {
+  min-width: 360px;
+  max-width: 900px;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+button {
+  background: #4d5b9e;
+  font-family: "Inter", sans-serif;
+  font-weight: 500px;
+  color: #f5f7fb;
+  border-radius: 15px;
+  padding: 15px 40px;
+  margin-bottom: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.home {
+  padding-top: 150px;
+}
+.home p {
+  font-family: "Inter", sans-serif;
+}
+.q-a-container {
+  width: 90%;
+  margin: 0 auto;
+  text-align: left;
+}
+/* This might have been necessary due to styling of inputs/labels*/
+.q-a-container > h3 {
+  padding-left: 12px;
+}
+.answers-container {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 30px;
+  gap: 5px;
+}
+/* Hide the default radio button */
+input[type="radio"] {
+  display: none;
+}
+
+/* Style for the custom radio button */
+label.radio-btn {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: whitesmoke;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  cursor: pointer;
+  margin: 5px;
+  position: relative;
+  color: #293264;
+  font-family: Inter;
+  font-size: 1rem;
+}
+
+/* Style for the custom radio button when selected */
+input[type="radio"]:checked + label.radio-btn {
+  background: #d6dbf5;
+}
+
+/* classes that are implemented when quizGraded */
+
+input[type="radio"]:checked + label.incorrect-answer {
+  background-color: pink;
+}
+label.correct-answer {
+  background: #94d7a2;
+}
+/* Need this below if user gets it right then our label.correct-answer gets overwritten by more specific selector */
+input[type="radio"]:checked + label.radio-btn.correct-answer {
+  background: #94d7a2;
+}
+
+.score-div {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  align-items: center;
+}
+.score-div > button {
+  margin: 10px 0;
+}
+
+.img {
+  display: none;
+}
+select {
+  margin-bottom: 20px;
+  border-radius: 10px;
+  font-family: Inter, sans-serif;
+  padding: 5px;
+}
+option {
+  padding: 20px;
+}
+/* The addition of a second button necessitated this band-aid emergency media query */
+@media screen and (max-width: 800px) {
+  .score-div > button {
+    padding: 5px;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  .lemony {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 80px;
+  }
+  .baby {
+    display: block;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+  }
+  .q-a-container {
+    width: 80%;
+  }
+}
+@media screen and (min-width: 900px) {
+  .lemony {
+    width: 150px;
+  }
+  .baby {
+    width: 75px;
+  }
+  select,
+  label,
+  .home > p,
+  button {
+    font-size: 1.25rem;
+  }
+  .home > h1 {
+    font-size: 2.5rem;
+  }
+}
