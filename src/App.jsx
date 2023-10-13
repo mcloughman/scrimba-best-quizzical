@@ -110,14 +110,10 @@ export default function App() {
   return (
     <div className="container">
       <div className="images-div">
+        <img src="public/assets/blob-baby.png" alt="" className="img baby" />
         <img
-          src="src/assets/blob-baby.png"
-          alt="baby-blob"
-          className="img baby"
-        />
-        <img
-          src="src/assets/blob-lemony.png"
-          alt="lemony-blob"
+          src="public/assets/blob-lemony.png"
+          alt=""
           className="img lemony"
         />
       </div>
