@@ -3,7 +3,7 @@ export default function Home(props) {
   return (
     <div className="home">
       <h1>Quizzical</h1>
-      <p>Test your trivia knowledge</p>
+      <h3>Test your trivia knowledge</h3>
       <div className="dropdowns">
         <div className="category dropdown">
           <label htmlFor="category">Category-----------</label>

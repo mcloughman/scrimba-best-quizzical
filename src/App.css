@@ -29,14 +29,13 @@ button {
 .home {
   padding-top: 150px;
 }
-.home p {
-  font-family: "Inter", sans-serif;
-}
+
 select,
 option,
 .dropdown > label {
   font-size: 1.25rem;
   font-family: Inter, sans-serif;
+  color: #293264;
 }
 .q-a-container {
   width: 90%;
@@ -147,7 +146,7 @@ option {
   .baby {
     width: 75px;
   }
-  select,
+
   label,
   .home > p,
   button {
