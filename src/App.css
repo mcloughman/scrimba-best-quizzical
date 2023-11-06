@@ -21,7 +21,7 @@ button {
   font-weight: 500px;
   color: #f5f7fb;
   border-radius: 15px;
-  padding: 15px 40px;
+  padding: 10px 20px;
   margin-bottom: 50px;
   cursor: pointer;
   font-size: 1rem;
@@ -31,7 +31,11 @@ button {
 }
 .home p {
   font-family: "Inter", sans-serif;
-  font-size: 1.25rem;
+}
+select,
+option {
+  font-size: 1rem;
+  font-family: Inter, sans-serif;
 }
 .q-a-container {
   width: 90%;
@@ -103,11 +107,11 @@ input[type="radio"]:checked + label.radio-btn.correct-answer {
 select {
   margin-bottom: 20px;
   border-radius: 10px;
-  font-family: Inter, sans-serif;
+
   padding: 5px;
 }
 option {
-  padding: 20px;
+  padding: 10px;
 }
 /* The addition of a second button necessitated this band-aid emergency media query */
 @media screen and (max-width: 800px) {
