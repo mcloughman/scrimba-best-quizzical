@@ -33,8 +33,9 @@ button {
   font-family: "Inter", sans-serif;
 }
 select,
-option {
-  font-size: 1rem;
+option,
+.dropdown > label {
+  font-size: 1.25rem;
   font-family: Inter, sans-serif;
 }
 .q-a-container {
