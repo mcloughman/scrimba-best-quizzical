@@ -17,37 +17,49 @@ export default function App() {
   const [quizGraded, setQuizGraded] = useState(false)
   const [score, setScore] = useState("")
   const [error, setError] = useState("")
-
-  // Initially this function was created and called inside the useEffect. But we need it outside the useEffect for playAgain. So when the app loads the very first time, the useEffect that calls this function inside will run. And since quizInProgress evaluates to false, the Home comonent is rendered. And the user clicks on startQuiz to change quizInProgress to true and render the Question Component however many times it needs to. At the end, when user decides to play again, we don't user taken to home page. So we create the playAgain function which fetches the questions and updates the states that we need to update. Since we still keep quizInProgress as true, we are able to bypass the Home component. There are possible upgrades like setting isLoading for UX. But for now this works. I have a handle on it.
-  const fetchQuestions = async (url) => {
-    try {
-      const apiUrl = `https://opentdb.com/api.php?amount=${quizOptions.numQuestions}&difficulty=${quizOptions.difficulty}&category=${quizOptions.category}`
-
-      const response = await fetch(apiUrl)
-      if (!response.ok) {
-        throw new Error("Failed to fetch")
+  const [lastAPICallTime, setLastAPICallTime] = useState(null)
+  // Initially this function was created and called inside the useEffect. 
+  // But we need it outside the useEffect for playAgain. 
+  // So when the app loads the very first time, 
+  // the useEffect that calls this function inside will run. 
+  // And since quizInProgress evaluates to false, the Home comonent is rendered. 
+  // And the user clicks on startQuiz to change quizInProgress to true 
+  // and render the Question Component however many times it needs to. 
+  // At the end, when user decides to play again, we don't user taken to home page. 
+  // So we create the playAgain function which fetches the questions and updates 
+  // the states that we need to update. Since we still keep quizInProgress as true, 
+  // we are able to bypass the Home component. There are possible upgrades like 
+  // setting isLoading for UX. But for now this works. I have a handle on it.
+  const fetchQuestions = async () => {
+      try {
+        setLastAPICallTime(Date.now())
+        const apiUrl = `https://opentdb.com/api.php?amount=${quizOptions.numQuestions}&difficulty=${quizOptions.difficulty}&category=${quizOptions.category}`
+        const response = await fetch(apiUrl)
+        if (!response.ok) {
+          throw new Error("Failed to fetch")
+        }
+        const data = await response.json()
+        const questionsWithIds = data.results.map((questionObj) => ({
+          ...questionObj,
+          key: nanoid(),
+          id: nanoid(),
+          question: he.decode(questionObj.question),
+          correct_answer: he.decode(questionObj.correct_answer),
+          incorrect_answers: questionObj.incorrect_answers.map((answer) =>
+            he.decode(answer)
+          ),
+        }))
+        setQuestions(questionsWithIds)
+      } catch (e) {
+        setError(e.message)
+        console.log("Error", e.message)
       }
-      const data = await response.json()
-      const questionsWithIds = data.results.map((questionObj) => ({
-        ...questionObj,
-        key: nanoid(),
-        id: nanoid(),
-        question: he.decode(questionObj.question),
-        correct_answer: he.decode(questionObj.correct_answer),
-        incorrect_answers: questionObj.incorrect_answers.map((answer) =>
-          he.decode(answer)
-        ),
-      }))
+    
 
-      setQuestions(questionsWithIds)
-    } catch (e) {
-      setError(e.message)
-      console.log("Error", e.message)
-    }
   }
   useEffect(() => {
     fetchQuestions() // Fetch questions when the component mounts
-  }, [quizOptions])
+  }, [])
 
   const handleQuizOptionChange = (optionName, value) => {
     setQuizOptions((prevOptions) => ({
@@ -61,10 +73,19 @@ export default function App() {
   }
   // How do we handle bypassing Home component on play again? VERY Important.
   function playAgain() {
-    setQuizGraded(false) // Reset the quizGraded state
-    setScore("") // Reset the score state
-    setSelectedAnswers({}) // Reset selectedAnswers state
-    fetchQuestions() // Fetch new questions to start a new quiz
+    let waitTime
+    if (lastAPICallTime === null) {
+      waitTime = 0
+    } else {
+      const differenceInMilliseconds = Date.now() - lastAPICallTime
+      waitTime =  differenceInMilliseconds > 5000 ? 0 : (5001 - differenceInMilliseconds) 
+    }
+    setTimeout(async () => {
+      setQuizGraded(false) // Reset the quizGraded state
+      setScore("") // Reset the score state
+      setSelectedAnswers({}) // Reset selectedAnswers state
+      fetchQuestions() // Fetch new questions to start a new quiz
+    }, waitTime)
   }
   // This function will work to re-render the Home component so user can choose new Quiz options
   function changeQuiz() {
