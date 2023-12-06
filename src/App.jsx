@@ -76,15 +76,6 @@ export default function App() {
       setIsLoading(false)
     }
   }
-  useEffect(() => {
-    console.log("Use Effect Ran")
-
-    const waitTime = calculateWaitTime()
-
-    setTimeout(() => {
-      fetchQuestions()
-    }, waitTime)
-  }, [])
 
   const handleQuizOptionChange = (optionName, value) => {
     setQuizOptions((prevOptions) => ({
