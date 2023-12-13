@@ -4,7 +4,7 @@ Trivia application built with React, using technologies such as JavaScript, CSS,
 
 ## Live Demo
 [Check out the live demo here](https://quizzical-michaelloughman.netlify.app/)
-![Quizzical App](https://github.com/mcloughman/scrimba-best-quizzical/blob/main/assets/51391940/e593fb76-3f86-44b0-a4bb-0fb4a0ff1c3b.png)
+
 
 ## Technologies Used
 
